@@ -29,6 +29,7 @@ jobs:
             powerpc64le-linux-musl,
             s390x-linux-musl,
             riscv64-linux-musl,
+            loongarch64-linux-musl,
           ]
 
     name: ${{ matrix.name }} ${{ matrix.arch_type }}
@@ -67,7 +68,7 @@ jobs:
         run: docker exec --env-file env.custom -w  /root/btop multiarch make install PREFIX=/root/btop-completed
 
       - name: Docker - archive ${{ matrix.arch_type }} toolchain
-        run: docker exec --env-file env.custom -w /root multiarch tar -cJf ${{ matrix.arch_type }}.tar.xz btop-completed
+        run: docker exec --env-file env.custom -w /root multiarch tar -cJf ${{ matrix.arch_type }}.tar.xz btop-completed/
 
       - name: Host - Set btop version
         run: echo "btop_version=$(curl -sL https://raw.githubusercontent.com/aristocratos/btop/main/src/btop.cpp | sed -rn 's|(.*)const string Version = "(.*)";|\2|p')" >> $GITHUB_ENV
