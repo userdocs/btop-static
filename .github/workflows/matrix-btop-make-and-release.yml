@@ -3,6 +3,13 @@ name: matrix btop and release
 on:
   - workflow_dispatch
 
+permissions:
+  actions: write
+  id-token: write
+  contents: write
+  attestations: write
+  packages: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
