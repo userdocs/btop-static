@@ -76,7 +76,9 @@ jobs:
 
       - name: Docker - archive ${{ matrix.arch_type }} toolchain
         working-directory: btop-completed
-        run: tar -cJf ${{ matrix.arch_type }}.tar.xz *
+        run: |
+          sudo chown -R $(id -u):$(id -g) .
+          tar -cJf ${{ matrix.arch_type }}.tar.xz *
 
       - name: Host - Set btop version
         run: echo "btop_version=$(curl -sL https://raw.githubusercontent.com/aristocratos/btop/main/src/btop.cpp | sed -rn 's|(.*)const string Version = "(.*)";|\2|p')" >> $GITHUB_ENV
