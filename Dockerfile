@@ -1,8 +1,8 @@
 FROM alpine:latest AS builder
 
 ARG PLATFORM
-ARG ARCH
-ARG REPO
+ARG ARCH="x86_64-linux-musl"
+ARG REPO="userdocs/btop-crossbuilds"
 
 RUN apk update \
 	&& apk upgrade \
@@ -10,7 +10,7 @@ RUN apk update \
 	&& adduser -Ds /bin/bash -u 1000 username \
 	&& printf '%s' 'username ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/github
 
-ADD curl -sLo- "https://github.com/${REPO}/releases/latest/download/${ARCH}.tar.xz" | tar -xJf - -C /usr/local/
+ADD https://github.com/${REPO}/releases/latest/download/${ARCH}.tar.xz /usr/local/
 
 USER username
 

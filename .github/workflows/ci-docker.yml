@@ -18,31 +18,24 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: [amd64, arm32v6, arm32v7, arm64v8, i386, ppc64le, riscv64, s390x]
+        arch: [i686, x86_64, armv6, armv7l, aarch64, ppc64le, riscv64, s390x]
         include:
-          - arch: amd64
-            mcm: x86_64-linux-musl
+          - arch: x86_64
             platform: linux/amd64
-          - arch: arm32v6
-            mcm: armv6-linux-musl
+          - arch: armv6
             platform: linux/arm/v6
-          - arch: arm32v7
-            mcm: armv7l-linux-musl
+          - arch: armv7l
             platform: linux/arm/v7
-          - arch: arm64v8
-            mcm: aarch64-linux-musl
+          - arch: aarch64
             platform: linux/arm64
-          - arch: i386
-            mcm: i686-linux-musl
+          - arch: i686
             platform: linux/386
           - arch: ppc64le
             mcm: powerpc64le-linux-musl
             platform: linux/ppc64le
           - arch: riscv64
-            mcm: riscv64-linux-musl
             platform: linux/riscv64
           - arch: s390x
-            mcm: s390x-linux-musl
             platform: linux/s390x
 
     steps:
@@ -112,7 +105,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
           build-args: |
             PLATFORM=linux/${{ matrix.platform }}
-            ARCH=${{ matrix.mcm }}
+            ARCH=${{ matrix.mcm }}-linux-musl
             REPO=${{ github.repository }}
 
       # Export digest
