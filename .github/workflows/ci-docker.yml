@@ -90,6 +90,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
+      - name: Install dependencies
+        run: curl -LO https://github.com/${{ github.repository }}/releases/latest/download/${{ matrix.arch }}-linux-musl.tar.xz
+
       # Build and push Docker images
       - name: Build and push by digest
         id: build
@@ -105,8 +108,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
           build-args: |
             PLATFORM=linux/${{ matrix.platform }}
-            ARCH=${{ matrix.mcm }}-linux-musl
-            REPO=${{ github.repository }}
+            ARCH=${{ matrix.arch }}-linux-musl
 
       # Export digest
       - name: Export digest

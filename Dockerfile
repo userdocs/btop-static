@@ -10,7 +10,7 @@ RUN apk update \
 	&& adduser -Ds /bin/bash -u 1000 username \
 	&& printf '%s' 'username ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/github
 
-ADD https://github.com/${REPO}/releases/latest/download/${ARCH}.tar.xz /usr/local/
+ADD ${ARCH}.tar.xz /usr/local/
 
 USER username
 
