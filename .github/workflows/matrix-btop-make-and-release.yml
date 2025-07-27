@@ -59,19 +59,19 @@ jobs:
           ghcr.io/userdocs/musl-cross-make:${{ matrix.arch_type }}
 
       - name: Docker - apk install build deps
-        run: docker exec -w /home/gh multiarch apk add autoconf automake bash build-base coreutils curl findutils git libarchive-tools libtool linux-headers ncurses-dev patch pkgconf xz zip
+        run: docker exec -w /home/gh ${container_name} apk add autoconf automake bash build-base coreutils curl findutils git libarchive-tools libtool linux-headers ncurses-dev patch pkgconf xz zip
 
       - name: Docker - Git clone btop
-        run: docker exec -w /home/gh multiarch git clone --single-branch --branch "main" --shallow-submodules --recurse-submodules --depth 1 https://github.com/aristocratos/btop.git btop
+        run: docker exec -w /home/gh ${container_name} git clone --single-branch --branch "main" --shallow-submodules --recurse-submodules --depth 1 https://github.com/aristocratos/btop.git btop
 
       - name: Docker - build ${{ matrix.arch_type }} toolchain
-        run: docker exec -w /home/gh/btop multiarch make STATIC=true STRIP=true ARCH=${{ matrix.arch_type }} -j"$(nproc)" arch_type=${{ matrix.arch_type }} CC=${{ matrix.arch_type }}-gcc AR=${{ matrix.arch_type }}-ar CXX=${{ matrix.arch_type }}-g++
+        run: docker exec -w /home/gh/btop ${container_name} make STATIC=true STRIP=true ARCH=${{ matrix.arch_type }} -j"$(nproc)" arch_type=${{ matrix.arch_type }} CC=${{ matrix.arch_type }}-gcc AR=${{ matrix.arch_type }}-ar CXX=${{ matrix.arch_type }}-g++
 
       - name: Docker - install ${{ matrix.arch_type }} toolchain
-        run: docker exec -w /home/gh/btop multiarch make install PREFIX=/home/gh/btop-completed
+        run: docker exec -w /home/gh/btop ${container_name} make install PREFIX=/home/gh/btop-completed
 
       - name: Docker - archive ${{ matrix.arch_type }} toolchain
-        run: docker exec -w /home/gh/btop-completed multiarch sh -c 'tar -cJf ../${{ matrix.arch_type }}.tar.xz *'
+        run: docker exec -w /home/gh/btop-completed ${container_name} sh -c 'tar -cJf ../${{ matrix.arch_type }}.tar.xz *'
 
       - name: Host - Set btop version
         run: echo "btop_version=$(curl -sL https://raw.githubusercontent.com/aristocratos/btop/main/src/btop.cpp | sed -rn 's|(.*)const string Version = "(.*)";|\2|p')" >> $GITHUB_ENV
