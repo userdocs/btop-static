@@ -1,4 +1,4 @@
-name: ci - linux docker build
+name: 02 - docker build and publish
 
 on:
   workflow_dispatch:

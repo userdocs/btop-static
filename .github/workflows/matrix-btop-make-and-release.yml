@@ -1,4 +1,4 @@
-name: matrix btop and release
+name: 01 - cross build and release
 
 on:
   - workflow_dispatch
