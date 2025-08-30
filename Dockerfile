@@ -1,7 +1,19 @@
-FROM alpine:latest@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1 AS builder
+FROM alpine:edge AS builder
 
 ARG ARCH="x86_64"
 ARG REPO="userdocs/btop-static"
+
+# Add metadata labels for easy parsing
+LABEL org.opencontainers.image.base.name="alpine:edge" \
+      org.opencontainers.image.base.id="alpine" \
+      org.opencontainers.image.base.codename="edge" \
+      org.opencontainers.image.title="btop-crossbuilds" \
+      org.opencontainers.image.description="statically linked btop binaries built on alpine linux" \
+      org.opencontainers.image.source="https://github.com/userdocs/btop-static" \
+      org.opencontainers.image.url="https://github.com/userdocs/btop-static" \
+      org.opencontainers.image.documentation="https://github.com/userdocs/btop-static/blob/main/README.md" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.vendor="userdocs"
 
 RUN apk update \
 	&& apk upgrade \
