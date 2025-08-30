@@ -1,4 +1,4 @@
-FROM alpine:edge AS builder
+FROM alpine:edge@sha256:115729ec5cb049ba6359c3ab005ac742012d92bbaa5b8bc1a878f1e8f62c0cb8 AS builder
 
 ARG ARCH="x86_64"
 ARG REPO="userdocs/btop-static"
