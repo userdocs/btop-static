@@ -72,7 +72,7 @@ jobs:
           images: ${{ env.GHCR_REPO }}
 
       - name: Login to GHCR
-        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
@@ -88,7 +88,7 @@ jobs:
 
       - name: Build and push by digest
         id: build
-        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
+        uses: docker/build-push-action@601a80b39c9405e50806ae38af30926f9d957c47 # v6.19.1
         with:
           context: .
           platforms: ${{ matrix.platform }}
@@ -132,7 +132,7 @@ jobs:
           merge-multiple: true
 
       - name: Login to GHCR
-        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
