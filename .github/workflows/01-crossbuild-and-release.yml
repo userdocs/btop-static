@@ -55,13 +55,13 @@ jobs:
       - name: Create docker ${{ env.container_name }} ${{ matrix.arch }} container
         uses: userdocs/actions/qbt_docker@e8f57bd585c7bb6dcce011694d6772bab657abca # v1.0.7
         with:
-            os_id: ghcr.io/userdocs/musl-cross-make
-            os_version_id: ${{ matrix.arch_type }}
-            additional_apps: >
-              autoconf automake bash build-base coreutils curl findutils git libarchive-tools libtool linux-headers ncurses-dev patch pkgconf xz zip
-            custom_docker_commands: |
-              -e CPPFLAGS=-I/usr/include/fortify -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=3
-              -e LDFLAGS=-static --static -Wl,-O1,--as-needed,--sort-common,-z,nodlopen,-z,noexecstack,-z,now,-z,relro,-z,--no-copy-dt-needed-entries,--build-id
+          os_id: ghcr.io/userdocs/qbt-musl-cross-make
+          os_version_id: ${{ matrix.arch_type }}
+          additional_apps: >
+            autoconf automake bash build-base coreutils curl findutils git libarchive-tools libtool linux-headers ncurses-dev patch pkgconf xz zip
+          custom_docker_commands: |
+            -e CPPFLAGS=-I/usr/include/fortify -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=3
+            -e LDFLAGS=-static --static -Wl,-O1,--as-needed,--sort-common,-z,nodlopen,-z,noexecstack,-z,now,-z,relro,-z,--no-copy-dt-needed-entries,--build-id
 
       - name: Docker - Git clone btop
         run: docker exec -w "${wd}" "${container_name}" git clone --single-branch --branch "main" --shallow-submodules --recurse-submodules --depth 1 https://github.com/aristocratos/btop.git btop
