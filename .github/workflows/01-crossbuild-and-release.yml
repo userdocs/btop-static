@@ -60,10 +60,10 @@ jobs:
           additional_apps: >
             autoconf automake bash build-base coreutils curl findutils git libarchive-tools libtool linux-headers ncurses-dev patch pkgconf xz zip
           custom_docker_commands: |
-            -e CPPFLAGS="-I/usr/include/fortify -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=3"
-            -e CFLAGS="-flto -fno-fat-lto-objects"
-            -e CXXFLAGS="-flto -fno-fat-lto-objects"
-            -e LDFLAGS="-static --static -flto -fuse-ld=mold -Wl,-O1,--build-id,-z,noexecstack"
+            -e CPPFLAGS=-I/usr/include/fortify -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=3
+            -e CFLAGS=-flto -fno-fat-lto-objects
+            -e CXXFLAGS=-flto -fno-fat-lto-objects
+            -e LDFLAGS=-static --static -flto -fuse-ld=mold -Wl,-O1,--build-id,-z,noexecstack
 
       - name: Docker - Git clone btop
         run: docker exec -w "${wd}" "${container_name}" git clone --single-branch --branch "main" --shallow-submodules --recurse-submodules --depth 1 https://github.com/aristocratos/btop.git btop
