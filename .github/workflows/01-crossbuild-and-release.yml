@@ -60,7 +60,7 @@ jobs:
           additional_apps: >
             autoconf automake bash build-base coreutils curl findutils git libarchive-tools libtool linux-headers ncurses-dev patch pkgconf xz zip
           custom_docker_commands: |
-            -e CPPFLAGS=-I/usr/include/fortify -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=3
+            -e CPPFLAGS=-isystem /usr/include/fortify -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=3
             -e CFLAGS=-flto -fno-fat-lto-objects
             -e CXXFLAGS=-flto -fno-fat-lto-objects
             -e LDFLAGS=-static --static -flto ${{ !startsWith(matrix.arch_type, 'mips') && '-fuse-ld=mold' || '' }} -Wl,-O1,--build-id,-z,noexecstack
