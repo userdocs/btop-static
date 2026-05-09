@@ -8,7 +8,8 @@ Example download using `x86_64`:
 
 ```bash
 wget -q "https://github.com/userdocs/btop-static/releases/latest/download/x86_64-linux-musl.tar.xz" -O ~/btop.tar.xz
-tar xf "btop.tar.xz" --strip-components=1 -C ~/
+tar xf "btop.tar.xz" -C ~/
+chmod 700 ~/bin/btop
 ```
 
 The rest are available here: https://github.com/userdocs/btop-static/releases/latest
