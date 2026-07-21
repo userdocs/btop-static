@@ -48,12 +48,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - name: Create docker ${{ env.container_name }} ${{ matrix.arch }} container
-        uses: userdocs/actions/qbt_docker@805f467e9075f3adb783b7bf0d9311ef76bd78c7 # main
+        uses: userdocs/actions/qbt_docker@fb94b50e995253881764f9dcd4389e5cd18f6553 # main
         with:
           os_id: ghcr.io/userdocs/musl-cross-make
           os_version_id: ${{ matrix.arch_type }}
