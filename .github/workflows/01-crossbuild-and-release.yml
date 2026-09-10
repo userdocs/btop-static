@@ -53,7 +53,7 @@ jobs:
           persist-credentials: false
 
       - name: Create docker ${{ env.container_name }} ${{ matrix.arch }} container
-        uses: userdocs/actions/qbt_docker@8410d9b3d92daf90e9ad841309f1398383b17b4f # main
+        uses: userdocs/actions/qbt_docker@74a803d21d0040ba5cc83cfdcc677135d830771c # main
         with:
           os_id: ghcr.io/userdocs/musl-cross-make
           os_version_id: ${{ matrix.arch_type }}
